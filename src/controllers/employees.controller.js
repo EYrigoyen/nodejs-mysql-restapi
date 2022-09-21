@@ -39,7 +39,7 @@ export const updateEmployees = async(req, res) => {
     const {id} = req.params
     const {name, salary} = req.body
     
-    const [result] = await pool.query('UPDATE employees SET name = ?, salary = ? WHERE id = ?', [name, salary, id])
+    const [result] = await pool.query('UPDATE employees SET name = IFNULL(?, name), salary = IFNULL(?, salary) WHERE id = ?', [name, salary, id])
 
     console.log(result)
     
