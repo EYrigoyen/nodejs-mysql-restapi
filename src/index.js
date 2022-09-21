@@ -9,5 +9,11 @@ app.use(express.json())
 app.use(indexRoutes)
 app.use('/api', employeesRoute)
 
+app.use((req, res, next) => {
+    res.status(404).json({
+        message:'endpoint not found'
+    })
+})
+
 app.listen(3000)
 console.log('Server running on port 3000')
